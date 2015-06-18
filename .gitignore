@@ -6,3 +6,8 @@ bower_components/
 
 build/
 dist/
+
+# ionic stuff
+platforms/
+plugins/
+www/lib
