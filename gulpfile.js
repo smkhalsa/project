@@ -17,6 +17,7 @@ var rename = require('gulp-rename');
 var sh = require('shelljs');
 var shell = require('gulp-shell');
 
+var notify = require('gulp-notify');
 // var watch = require('gulp-watch');
 
 var paths = {
@@ -28,7 +29,10 @@ gulp.task('test', function() {
   gulp.src('./www/js/**/*.js')  
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(jshint.reporter('fail'));
+    .pipe(jshint.reporter('fail'))
+    .on('error', notify.onError(function(error) {
+      return error.message;
+    }));
 });
 
 gulp.task('build', function() {
