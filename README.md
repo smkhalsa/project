@@ -6,9 +6,9 @@
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Sat Khalsa
+  - __Scrum Master__: Michael Borglin
+  - __Development Team Members__: Terry Chan, Justin Fong
 
 ## Table of Contents
 
@@ -26,11 +26,7 @@
 
 ## Requirements
 
-- Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Gulp
 
 ## Development
 
@@ -42,6 +38,7 @@ From within the root directory:
 sudo npm install -g bower
 npm install
 bower install
+npm install -g gulp
 ```
 
 ### Roadmap

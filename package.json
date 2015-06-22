@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "bower": "^1.3.3",
+    "gulp-jsdoc": "^0.1.4",
     "gulp-jshint": "^1.11.0",
     "gulp-karma-runner": "^1.1.1",
     "gulp-notify": "^2.2.0",

@@ -8,7 +8,7 @@ var concat = require('gulp-concat');
 
 var jshint = require('gulp-jshint');
 // var karma = require('karma').server;
-var karma = require('gulp-karma-runner')
+var karma = require('gulp-karma-runner');
 
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
@@ -18,12 +18,18 @@ var sh = require('shelljs');
 var shell = require('gulp-shell');
 
 var notify = require('gulp-notify');
+var jsdoc = require("gulp-jsdoc");
 // var watch = require('gulp-watch');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
   js: ['./www/js/**/*.js']
 };
+
+gulp.task('jsdoc', function() {
+  gulp.src(["./www/js/**/*.js", "README.md"])
+    .pipe(jsdoc('./docs'));
+});
 
 gulp.task('test', function() {
   gulp.src('./www/js/**/*.js')  
