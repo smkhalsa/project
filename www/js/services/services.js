@@ -34,7 +34,7 @@ angular.module('app.services', [
   /** ??? */
   this.getRoute = function() {
     return $http({
-      url: 'http://mybus-server.herokuapp.com/agencies/sf-muni/routes',
+      url: 'http://mybus-api.herokuapp.com/agencies/sf-muni/routes',
       // url: 'http://localhost:3000/agencies/sf-muni/routes',
       method: 'GET'
     });
@@ -43,7 +43,7 @@ angular.module('app.services', [
   /** Gets the stations that are closest in proximity to the user */
   this.getStops = function(latlon) {
     return $http({
-      url: 'http://mybus-server.herokuapp.com/locations/' + latlon.latitude + ',' + latlon.longitude + '/predictions',
+      url: 'http://mybus-api.herokuapp.com/locations/' + latlon.latitude + ',' + latlon.longitude + '/predictions',
       // url: 'http://localhost:3000/locations/' + latlon.latitude + ',' + latlon.longitude + '/predictions',
       method: 'GET'
     });
