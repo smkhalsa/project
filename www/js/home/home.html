@@ -3,8 +3,8 @@
     <h1 class="title">myBus</h1>
   </ion-header-bar>
   <ion-content ng-controller="HomeController">
-    <div ng-repeat="routes in stops | orderBy:'routes.stop.distance'">
-      <a class="item item-thumbnail-left" href="#">
+    <div ng-repeat="routes in stops | orderBy:'routes.stop.distance'" ng-click='changePage(routes, "details")'>
+      <a class="item item-thumbnail-left">
         <img src="img/map.gif">
         <h2>{{ routes.route.title }}</h2>
         <p>{{ routes.stop.title }}</p>
@@ -13,7 +13,7 @@
           <p><strong>{{ value.direction.title }}</strong></p>
           <p>{{ value.minutes }} Minutes</p>
         </div>
-      </a>
     </div> 
+    </a>
   </ion-content>
 </ion-pane>
