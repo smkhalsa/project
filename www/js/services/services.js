@@ -7,8 +7,11 @@ angular.module('app.services', [
   'ngCordova'
 ])
 
-.service('LocationService', function($cordovaGeolocation, $ionicPlatform) {
-  /** takes a callback whose first argument contains current location */
+.service('LocationService', function($cordovaGeolocation, $ionicPlatform, $ionicPopup) {
+  /** 
+   * Takes a callback whose first argument contains current location. Displays an error to the user if location cannot be found.
+   * @param {func} callback - The function that recieves the lat and long
+   */
   this.getCurrentLocation = function(callback) {
     var options = {
       timeout: 10000,
@@ -23,8 +26,15 @@ angular.module('app.services', [
             longitude: position.coords.longitude
           });
         }, function(err) {
-          //handle error
-          console.log(err);
+          var alertPopup = $ionicPopup.alert({
+            title: 'Cannot find your location',
+            template: 'Could not get the current position. Either GPS signals are weak or GPS has been switched off'
+          });
+          alertPopup.then(function(res) {
+            //handle error
+            console.log(err);
+          });
+
         });
     });
   };
@@ -40,7 +50,10 @@ angular.module('app.services', [
     });
   };
 
-  /** Gets the stations that are closest in proximity to the user */
+  /** 
+   * Gets the stations that are closest in proximity to the user 
+   * @param {object} latlon - Object with a latitude and longitude
+   */
   this.getStops = function(latlon) {
     return $http({
       url: 'http://mybus-api.herokuapp.com/locations/' + latlon.latitude + ',' + latlon.longitude + '/predictions',
