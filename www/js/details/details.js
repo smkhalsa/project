@@ -1,12 +1,14 @@
 angular.module('app.details', [])
 
-  .controller('DetailsController', function($scope, $ionicHistory, $location, LocationService, RestBusService, PageChangeService) {
+  .controller('DetailsController', function($scope, $ionicHistory, $location, LocationService, RestBusService,
+   PageChangeService, ReadFileService) {
+
     var init = function() {
       $scope.routeDetails = PageChangeService.currentRoute;
     };
     
     $scope.goBack = function() {
-      var lastPage = PageChangeService.backView
+      var lastPage = PageChangeService.backView;
       $location.path(lastPage.splice(lastPage.length - 1, 1));
     };
 
@@ -16,40 +18,29 @@ angular.module('app.details', [])
 
       RestBusService.getStops($scope.loc)
       .then(function(data) {
-        $scope.routeDetails = data.data[12];
+        $scope.routeInfo = PageChangeService.currentRoute;
         
+        $scope.stations = {};
+
         // load map 
         // var sanFran = {lat: 37.78, lng: -122.416}
         $scope.mapOptions = {center: {lat: $scope.loc.latitude, lng: $scope.loc.longitude}, zoom: 17};
         $scope.map = new google.maps.Map(document.getElementById('mapContainer'), $scope.mapOptions);
 
-        // station markers
-        $scope.stationMarkers = [];
+        // get list of stations
+        ReadFileService.readFile('../stops.json')
+          .then(function(data) {
+            $scope.stations = data.data;
 
-        // geocoder
-        $scope.geocoder = new google.maps.Geocoder();
+            var currentStation = $scope.stations[$scope.routeDetails.stop.id];
 
-        // get current city with reverse-geocoder
-        $scope.geocoder.geocode({
-          'latLng': new google.maps.LatLng($scope.loc.latitude, $scope.loc.longitude)}, 
-          function(results, status) {
-            $scope.city = results[0].address_components[3].long_name;
-            $scope.stopName = $scope.routeDetails.stop.title.slice(6);
-            console.log($scope.routeDetails);
-
-            // mark station location with geocode
-            $scope.geocoder.geocode({address: $scope.stopName + ', ' + $scope.city}, function(results, status) {
-              var loc = results[0].geometry.location;
-
-              var stationMarker = new google.maps.Marker({
-                position: new google.maps.LatLng(loc.A, loc.F),
-                map: $scope.map,
-                title: 'station'
-              });
-
+            // mark station
+            var stationMarker = new google.maps.Marker({
+              position: new google.maps.LatLng(currentStation.lat, currentStation.lon),
+              map: $scope.map,
+              title: 'station'
             });
-            
-        });
+          });
 
         // mark user location
         var userMarker = new google.maps.Marker({
