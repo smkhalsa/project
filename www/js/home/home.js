@@ -28,6 +28,7 @@ angular.module('app.home', [])
     
     $scope.changePage = function(route, uri) {
       PageChangeService.currentRoute = route;
+      PageChangeService.backView.push($location.url());
       $location.path('/' + uri);
     };
 

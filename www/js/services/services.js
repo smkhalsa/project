@@ -52,4 +52,5 @@ angular.module('app.services', [
 
 .service('PageChangeService', function() {
   this.currentRoute;
+  this.backView = [];
 });
