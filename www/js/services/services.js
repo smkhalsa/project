@@ -8,7 +8,10 @@ angular.module('app.services', [
 ])
 
 .service('LocationService', function($cordovaGeolocation, $ionicPlatform) {
-  /** takes a callback whose first argument contains current location */
+  /** 
+   * Takes a callback whose first argument contains current location 
+   * @param {func} callback - The function that recieves the lat and long
+   */
   this.getCurrentLocation = function(callback) {
     var options = {
       timeout: 10000,
@@ -40,7 +43,10 @@ angular.module('app.services', [
     });
   };
 
-  /** Gets the stations that are closest in proximity to the user */
+  /** 
+   * Gets the stations that are closest in proximity to the user 
+   * @param {object} latlon - Object with a latitude and longitude
+   */
   this.getStops = function(latlon) {
     return $http({
       url: 'http://mybus-api.herokuapp.com/locations/' + latlon.latitude + ',' + latlon.longitude + '/predictions',
