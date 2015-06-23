@@ -1,6 +1,6 @@
 angular.module('app.home', [])
 
-  .controller('HomeController', function($scope, LocationService, RestBusService) {
+  .controller('HomeController', function($scope, $location, LocationService, RestBusService, PageChangeService) {
 
     //on load get the user's current location
     LocationService.getCurrentLocation(function(currentLocation) {
@@ -21,5 +21,14 @@ angular.module('app.home', [])
         console.log(data.data);
       });
     });
+
+    $scope.log = function(data) {
+      console.log(data);
+    };
+    
+    $scope.changePage = function(route, uri) {
+      PageChangeService.currentRoute = route;
+      $location.path('/' + uri);
+    };
 
   });

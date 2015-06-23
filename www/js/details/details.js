@@ -1,12 +1,12 @@
 angular.module('app.details', [])
 
-  .controller('DetailsController', function($scope, LocationService, RestBusService) {
+  .controller('DetailsController', function($scope, LocationService, RestBusService, PageChangeService) {
     LocationService.getCurrentLocation(function(currentLocation) {
-      $scope.loc = currentLocation;
 
-      RestBusService.getStops($scope.loc)
-      .then(function(data) {
-        $scope.routeDetails = data.data[0];
-      });
+      var init = function() {
+        $scope.routeDetails = PageChangeService.currentRoute;
+      };
+
+      init();
     });
   });

@@ -48,4 +48,8 @@ angular.module('app.services', [
       method: 'GET'
     });
   };
+})
+
+.service('PageChangeService', function() {
+  this.currentRoute;
 });
