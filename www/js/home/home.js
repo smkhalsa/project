@@ -1,11 +1,23 @@
 angular.module('app.home', [])
 
   .controller('HomeController', function($scope, $location, LocationService, RestBusService, PageChangeService) {
+    
+    $scope.loc;
+    $scope.stops;
 
     //on load get the user's current location
-    LocationService.getCurrentLocation(function(currentLocation) {
-      $scope.loc = currentLocation;
+    var init = function() {
+      $scope.getLocation(function(currentLocation) {
+        $scope.loc = currentLocation;
+        $scope.getStops();
+      });
+    };
 
+    $scope.getLocation = function(callback) {
+      LocationService.getCurrentLocation(callback);
+    };
+
+    $scope.getStops = function() {
       RestBusService.getStops($scope.loc)
       .then(function(data) {
         $scope.stops = {};
@@ -17,10 +29,8 @@ angular.module('app.home', [])
             $scope.stops[routeName].values = $scope.stops[routeName].values.concat(data.data[i].values);
           }
         }
-        console.log($scope.stops);
-        console.log(data.data);
       });
-    });
+    };
 
     $scope.log = function(data) {
       console.log(data);
@@ -31,5 +41,6 @@ angular.module('app.home', [])
       PageChangeService.backView.push($location.url());
       $location.path('/' + uri);
     };
-
+    
+    init();
   });
