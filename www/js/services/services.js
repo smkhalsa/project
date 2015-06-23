@@ -7,9 +7,9 @@ angular.module('app.services', [
   'ngCordova'
 ])
 
-.service('LocationService', function($cordovaGeolocation, $ionicPlatform) {
+.service('LocationService', function($cordovaGeolocation, $ionicPlatform, $ionicPopup) {
   /** 
-   * Takes a callback whose first argument contains current location 
+   * Takes a callback whose first argument contains current location. Displays an error to the user if location cannot be found.
    * @param {func} callback - The function that recieves the lat and long
    */
   this.getCurrentLocation = function(callback) {
@@ -26,8 +26,15 @@ angular.module('app.services', [
             longitude: position.coords.longitude
           });
         }, function(err) {
-          //handle error
-          console.log(err);
+          var alertPopup = $ionicPopup.alert({
+            title: 'Cannot find your location',
+            template: 'Could not get the current position. Either GPS signals are weak or GPS has been switched off'
+          });
+          alertPopup.then(function(res) {
+            //handle error
+            console.log(err);
+          });
+
         });
     });
   };
