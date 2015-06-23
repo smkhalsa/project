@@ -66,4 +66,21 @@ angular.module('app.services', [
 .service('PageChangeService', function() {
   this.currentRoute;
   this.backView = [];
+})
+
+.service('ReadFileService', function($http) {
+
+  /**
+  * read a specific file
+  * @param {string} loc - location of file
+  */
+  this.readFile = function(loc) {
+    return $http({
+      url: loc,
+      method: 'GET'
+    });
+  };
+  
 });
+
+
