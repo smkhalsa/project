@@ -6,7 +6,7 @@ angular.module('app.home', [])
     $scope.stops;
 
     //on load get the user's current location
-    var init = function() {
+    $scope.init = function() {
       $scope.getLocation(function(currentLocation) {
         $scope.loc = currentLocation;
         $scope.getStops();
@@ -42,5 +42,5 @@ angular.module('app.home', [])
       $location.path('/' + uri);
     };
     
-    init();
+    $scope.init();
   });

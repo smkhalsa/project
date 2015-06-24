@@ -31,6 +31,13 @@ gulp.task('jsdoc', function() {
     .pipe(jsdoc('./docs'));
 });
 
+gulp.task('karma', function(done) {
+    karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done);
+});
+
 gulp.task('test', function(done) {
   gulp.src('./www/js/**/*.js')  
     .pipe(jshint())
