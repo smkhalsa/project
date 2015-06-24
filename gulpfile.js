@@ -46,10 +46,6 @@ gulp.task('test', function(done) {
     .on('error', notify.onError(function(error) {
       return error.message;
     }));
-  karma.start({
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: true
-  }, done);
 });
 
 gulp.task('build', function() {
