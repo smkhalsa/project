@@ -27,7 +27,7 @@ angular.module('app', [
   .config(function($stateProvider, $urlRouterProvider) {
 
     // Send to home if route is not found
-    $urlRouterProvider.otherwise('/routes');
+    $urlRouterProvider.otherwise('/routes.index');
 
     $stateProvider
       .state('routes', {
@@ -35,7 +35,7 @@ angular.module('app', [
         url: '/routes',
         views: {
           routes: {
-            template: '<ion-nav-view></ion-nav-view>'
+            template: '<div></div>'
           }
         }
       })
