@@ -7,8 +7,8 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 
 var jshint = require('gulp-jshint');
-// var karma = require('karma').server;
-var karma = require('gulp-karma-runner');
+var karma = require('karma').server;
+// var karma = require('gulp-karma-runner');
 
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
@@ -31,7 +31,14 @@ gulp.task('jsdoc', function() {
     .pipe(jsdoc('./docs'));
 });
 
-gulp.task('test', function() {
+gulp.task('karma', function(done) {
+    karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done);
+});
+
+gulp.task('test', function(done) {
   gulp.src('./www/js/**/*.js')  
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))

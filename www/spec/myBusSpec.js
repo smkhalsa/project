@@ -17,4 +17,11 @@ describe("HomeController", function() {
     expect(!!scope.changePage).toBe(true);
   }));
 
+
+  it("should fetch stops on initialization", inject(function($controller) {
+    var scope = {};
+      ctrl = $controller('HomeController', {$scope:scope});
+    expect(scope.stops).toBe(true);
+  }));
+  
 });
