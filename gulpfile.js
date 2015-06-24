@@ -19,6 +19,7 @@ var shell = require('gulp-shell');
 
 var notify = require('gulp-notify');
 var jsdoc = require("gulp-jsdoc");
+var protractor = require("gulp-protractor").protractor;
 // var watch = require('gulp-watch');
 
 var paths = {
@@ -46,7 +47,11 @@ gulp.task('test', function(done) {
     .on('error', notify.onError(function(error) {
       return error.message;
     }));
+  gulp.start()
 });
+
+gulp.task('protractor', shell.task([
+  'protractor www/spec/protractor.config.js']));
 
 gulp.task('build', function() {
   gulp.src('./www/js/**/*.js')
@@ -58,7 +63,7 @@ gulp.task('build', function() {
 });
 
 gulp.task('serveLab', shell.task([
-  'ionic serve --lab'  
+  'ionic serve --lab'
 ]));
 
 gulp.task('deploy', shell.task([
@@ -80,7 +85,9 @@ gulp.task('sass', function(done) {
     .pipe(minifyCss({
       keepSpecialComments: 0
     }))
-    .pipe(rename({ extname: '.min.css' }))
+    .pipe(rename({
+      extname: '.min.css'
+    }))
     .pipe(gulp.dest('./www/css/'))
     .on('end', done);
 });

@@ -5,8 +5,21 @@ angular.module('app.details', [])
 
     var init = function() {
       $scope.routeDetails = PageChangeService.currentRoute;
-      $scope.getLocation(function(currentLocation) {
-        $scope.loc = currentLocation;
+    };
+    
+    $scope.goBack = function() {
+      var lastPage = PageChangeService.backView;
+      $location.path(lastPage.splice(lastPage.length - 1, 1));
+    };
+
+    LocationService.getCurrentLocation(function(currentLocation) {
+      $scope.loc = currentLocation;
+      console.log($scope.loc);
+
+      RestBusService.getStops($scope.loc)
+      .then(function(data) {
+        $scope.routeDetails = data.data[12];
+        
         // load map 
         // var sanFran = {lat: 37.78, lng: -122.416}
         $scope.mapOptions = {center: {lat: $scope.loc.latitude, lng: $scope.loc.longitude}, zoom: 17};
