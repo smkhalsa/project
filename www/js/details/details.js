@@ -72,7 +72,7 @@ angular.module('app.details', [])
         });
 
       });
-    };
+    });
 
     
     $scope.goBack = function() {

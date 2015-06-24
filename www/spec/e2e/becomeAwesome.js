@@ -12,9 +12,7 @@ describe('Testing myBus', function() {
         it('should navigate to details when list item is clicked', function() {
                 browser.sleep(6000);
                 element.all(by.repeater("routes in stops")).then(function(posts) {
-                        console.log('Inside');
                         var titleElement = posts[0].click();
-                        // expect(titleElement.getText()).toEqual('YourEnteredTitle');
                 });
                 var elem = element(by.tagName('h1'));
                 expect(elem.getText()).toContain('myBus Details');
