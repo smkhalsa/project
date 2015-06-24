@@ -1,12 +1,12 @@
 <ion-view view-title="Routes">
-  <ion-content ng-controller="HomeController">
+  <ion-content>
   <input ng-model='routeSearch.route.title'>
-    <div ng-repeat="routes in stops | toArray | orderBy:'stop.distance' | filter:routeSearch" ng-click='changePage(routes, "details")'>
-      <a class="item item-thumbnail-left">
+    <div ng-repeat="route in routes | toArray | orderBy:'stop.distance' | filter:routeSearch">
+      <a class="item item-thumbnail-left" ui-sref="app.details({routeId:route.route.id})">
         <img src="img/map.gif">
-        <h2>{{ routes.route.title }}</h2>
-        <p>{{ routes.stop.title }}</p>
-        <p>{{ routes.stop.distance }}</p>
+        <h2>{{ route.route.title }}</h2>
+        <p>{{ route.stop.title }}</p>
+        <p>{{ route.stop.distance }}</p>
         <div ng-repeat="value in routes.values">
           <p><strong>{{ value.direction.title }}</strong></p>
           <p>{{ value.minutes }} Minutes</p>

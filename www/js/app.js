@@ -27,46 +27,59 @@ angular.module('app', [
   .config(function($stateProvider, $urlRouterProvider) {
 
     // Send to home if route is not found
-    $urlRouterProvider.otherwise('busRoutes.home');
+    $urlRouterProvider.otherwise('/routes');
 
     $stateProvider
-      .state('busRoutes', {
-        url: '/busRoutes',
+      .state('app', {
+        url: '',
         abstract: true,
         templateUrl: 'menu.html',
         controller: 'AppController'
       })
-      .state('busRoutes.home', {
-        url: '/home',
+      .state('app.routes', {
+        url: '/routes',
         views: {
           'menuContent': {
             templateUrl: 'js/busRoutes/home.html',
             controller: 'HomeController'
           }
+        },
+        resolve: {
+          routes: function(RestBusService) {
+            return RestBusService.getRoutes();
+          }
         }
       })
-      .state('busRoutes.details', {
-        url: '/:route',
-        templateUrl: 'js/busRoutes/details.html',
-        controller: 'DetailsController'
+      .state('app.details', {
+        url: '/routes/:routeId',
+        views: {
+          'menuContent': {
+            templateUrl: 'js/busRoutes/details.html',
+            controller: 'DetailsController'
+          }
+        },
+        resolve: {
+          route: function($scopeParams, RestBusService) {
+            return RestBusService.getRoute($stateParams.routeId).resolve('routes')
+          }
+        }
       })
-      .state('login', {
+      .state('app.login', {
         url: '/login',
         views: {
-          login: {
+          'menuContent': {
             templateUrl: 'js/auth/login.html'
           }
         }
       })
-      .state('signup', {
+      .state('app.signup', {
         url: '/signup',
         views: {
-          signup: {
+          'menuContent': {
             templateUrl: 'js/auth/signup.html'
           }
         }
       });
   })
   .controller('AppController', function($scope){
-
-    });
+  })
