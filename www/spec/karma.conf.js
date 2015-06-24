@@ -23,7 +23,7 @@ module.exports = function(config) {
       '../lib/ngCordova/dist/ng-cordova.js',
 
       '../js/**/*.js',
-      '../spec/myBusSpec.js'
+      '../spec/unit/myBusSpec.js'
     ],
 
 
