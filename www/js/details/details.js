@@ -3,11 +3,6 @@ angular.module('app.details', [])
   .controller('DetailsController', function($scope, $ionicHistory, $location, LocationService, RestBusService,
    PageChangeService, ReadFileService, VehiclesService, StopCodeService) {
 
-    StopCodeService.getStopCodes()
-      .then(function(data) {
-        console.log(data);
-      });
-
     var init = function() {
       $scope.vehicles = [];
       $scope.routeDetails = PageChangeService.currentRoute;
@@ -132,25 +127,7 @@ angular.module('app.details', [])
         $scope.userMarker.setPosition(new google.maps.LatLng(lat, lon));
         // $scope.map.panTo(new google.maps.LatLng(lat, lon));
         $scope.loc.latitude = lat;
-        $scope.loc.longitude = lon;
-      });
-
-      // switch to new closest station
-      RestBusService.getStops($scope.loc)
-      .then(function(data) {
-        var stops = data.data;
-        var stopsArr = [];
-        for(var i = 0; i < stops.length; i++) {
-          if(stops[i].route.id === $scope.routeDetails.route.id) {
-            stopsArr.push(stops[i]);
-          }
-        }
-
-        // console.log(stopsArr);
-        var lat = $scope.stations[stopsArr[0].stop.id].lat;
-        var lon = $scope.stations[stopsArr[0].stop.id].lon;
-
-        $scope.stationMarker.setPosition(new google.maps.LatLng(lat, lon));
+        $scope.loc.longitude = lon; 
       });
 
       // update vehicle position
@@ -163,6 +140,7 @@ angular.module('app.details', [])
           vehiclesById[vehicles[i].id] = vehicles[i];
         }
 
+        // update location of vehicles
         for(var j = 0, len2 = $scope.vehicles.length; j < len2; j++) {
           var lat = vehiclesById[$scope.vehicles[j].id].lat;
           var lon = vehiclesById[$scope.vehicles[j].id].lon;
