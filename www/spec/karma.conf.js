@@ -15,15 +15,15 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      // 'www/lib/angular/angular.js',
+      //'www/lib/angular/angular.js',
 
-      'www/lib/ionic/js/ionic.bundle.min.js',
-      'www/lib/angular-ui-router/release/angular-ui-router.js',
-      'www/lib/angular-mocks/angular-mocks.js',
-      'www/lib/ngCordova/dist/ng-cordova.js',
+      '../lib/ionic/js/ionic.bundle.min.js',
+      '../lib/angular-ui-router/release/angular-ui-router.js',
+      '../lib/angular-mocks/angular-mocks.js',
+      '../lib/ngCordova/dist/ng-cordova.js',
 
-      'www/js/**/*.js',
-      'www/spec/myBusSpec.js'
+      '../js/**/*.js',
+      '../spec/unit/myBusSpec.js'
     ],
 
 

@@ -9,7 +9,7 @@ exports.config = {
     'browserName': 'chrome'
   },
   specs: [
-    './e2e/becomeAwesome.js'
+    './e2e/**/*.js'
   ],
   jasmineNodeOpts: {
     showColors: true,

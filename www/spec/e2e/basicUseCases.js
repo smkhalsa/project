@@ -12,11 +12,26 @@ describe('Testing myBus', function() {
         it('should navigate to details when list item is clicked', function() {
                 browser.sleep(6000);
                 element.all(by.repeater("routes in stops")).then(function(posts) {
-                        console.log('Inside');
+                        //click on first list item
                         var titleElement = posts[0].click();
-                        // expect(titleElement.getText()).toEqual('YourEnteredTitle');
                 });
                 var elem = element(by.tagName('h1'));
                 expect(elem.getText()).toContain('myBus Details');
+        });
+        it('should navigate back from details to home', function() {
+                browser.sleep(6000);
+                element.all(by.repeater("routes in stops")).then(function(posts) {
+                        //click on first list item
+                        var titleElement = posts[0].click();
+                });
+                var elem = element(by.tagName('h1'));
+                expect(elem.getText()).toContain('myBus Details');
+
+                var backButton = element(by.name('back'));
+                backButton.click();
+
+                var elem = element(by.tagName('h1'));
+                expect(elem.getText()).toContain('myBus');
+
         });
 });

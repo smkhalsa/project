@@ -34,12 +34,12 @@ gulp.task('jsdoc', function() {
 
 gulp.task('karma', function(done) {
     karma.start({
-    configFile: __dirname + '/karma.conf.js',
+    configFile: __dirname + '/www/spec/karma.conf.js',
     singleRun: true
   }, done);
 });
 
-gulp.task('test', function(done) {
+gulp.task('jshint', function(done) {
   gulp.src('./www/js/**/*.js')  
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
@@ -47,7 +47,8 @@ gulp.task('test', function(done) {
     .on('error', notify.onError(function(error) {
       return error.message;
     }));
-  gulp.start()
+  gulp.start();
+
 });
 
 gulp.task('protractor', shell.task([
@@ -69,6 +70,8 @@ gulp.task('serveLab', shell.task([
 gulp.task('deploy', shell.task([
   'ionic upload'
 ]));
+
+gulp.task('test', ['jshint', 'karma', 'protractor']);
 
 gulp.task('dev', ['test']);
 
