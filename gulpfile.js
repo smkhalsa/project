@@ -33,14 +33,16 @@ gulp.task('jsdoc', function() {
 });
 
 gulp.task('karma', function(done) {
-    karma.start({
+  karma.start({
     configFile: __dirname + '/www/spec/karma.conf.js',
     singleRun: true
-  }, done);
+  }, function() {
+    done();
+  });
 });
 
 gulp.task('jshint', function(done) {
-  gulp.src('./www/js/**/*.js')  
+  gulp.src('./www/js/**/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(jshint.reporter('fail'))
@@ -52,7 +54,8 @@ gulp.task('jshint', function(done) {
 });
 
 gulp.task('protractor', shell.task([
-  'protractor www/spec/protractor.config.js']));
+  'protractor www/spec/protractor.config.js'
+]));
 
 gulp.task('build', function() {
   gulp.src('./www/js/**/*.js')
