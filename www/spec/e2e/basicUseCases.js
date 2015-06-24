@@ -30,7 +30,7 @@ describe('Testing myBus', function() {
                 var backButton = element(by.name('back'));
                 backButton.click();
 
-                var elem = element(by.tagName('h1'));
+                elem = element(by.tagName('h1'));
                 expect(elem.getText()).toContain('myBus');
 
         });
