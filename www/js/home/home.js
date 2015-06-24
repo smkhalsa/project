@@ -1,12 +1,17 @@
 angular.module('app.home', [])
 
-  .controller('HomeController', function($scope, $location, LocationService, RestBusService, PageChangeService) {
+  .controller('HomeController', function($scope, $location, $interval, LocationService, RestBusService, PageChangeService) {
     
     $scope.loc = {};
     $scope.stops = [];
 
     //on load get the user's current location
     $scope.init = function() {
+      $scope.loadPage();
+      $interval($scope.loadPage, 5000);
+    };
+    
+    $scope.loadPage = function() {
       $scope.getLocation(function(currentLocation) {
         $scope.loc = currentLocation;
         $scope.getStops();
