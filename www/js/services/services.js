@@ -63,6 +63,24 @@ angular.module('app.services', [
   };
 })
 
+.service('VehiclesService', function($http) {
+  this.getVehicles = function() {
+    return $http({
+      url: 'http://mybus-api.herokuapp.com/agencies/sf-muni/vehicles',
+      method: 'GET'
+    });
+  };
+})
+
+.service('StopCodeService', function($http) {
+  this.getStopCodes = function() {
+    return $http({
+      url: 'http://mybus-api.herokuapp.com/agencies/sf-muni/routes/5/stops/5646/predictions',
+      method: 'GET'
+    });
+  };
+})
+
 .service('PageChangeService', function() {
   this.currentRoute;
   this.backView = [];
