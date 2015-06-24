@@ -26,13 +26,13 @@ angular.module('app.services', [
             longitude: position.coords.longitude
           });
         }, function(err) {
+            console.log('hey', err);
           var alertPopup = $ionicPopup.alert({
             title: 'Cannot find your location',
             template: 'Could not get the current position. Either GPS signals are weak or GPS has been switched off'
           });
           alertPopup.then(function(res) {
             //handle error
-            console.log(err);
           });
 
         });
