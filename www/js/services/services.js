@@ -40,7 +40,7 @@ angular.module('app.services', [
   };
 })
 
-.service('RestBusService', function($http, $q, LocationService) {
+.service('RestBusService', function($http, $q, LocationService, $ionicLoading) {
   /** 
    * Gets the stations that are closest in proximity to the user 
    * @param {object} latlon - Object with a latitude and longitude

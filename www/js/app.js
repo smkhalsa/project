@@ -11,7 +11,16 @@ angular.module('app', [
    * Class that begins ionic and cordova.
    * @file
    */
-  .run(function($ionicPlatform) {
+  .run(function($ionicPlatform, $rootScope, $ionicLoading) {
+    // Default loading screen with spinner during http reqeust
+    $rootScope.$on('loading:show', function(){
+      $ionicLoading.show({template: '<ion-spinner icon="lines" class="spinner-balanced"></ion-spinner>'})
+    });
+    $rootScope.$on('loading:hide', function() {
+      $ionicLoading.hide()
+    });
+
+
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -24,7 +33,21 @@ angular.module('app', [
     });
   })
 
-  .config(function($stateProvider, $urlRouterProvider) {
+  .config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+
+    // Default loading screen with spinner during http reqeust
+    $httpProvider.interceptors.push(function($rootScope) {
+      return {
+        request: function(config) {
+          $rootScope.$broadcast('loading:show');
+          return config;
+        },
+        response: function(response) {
+          $rootScope.$broadcast('loading:hide');
+          return response;
+        }
+      }
+    });
 
     // Send to home if route is not found
     $urlRouterProvider.otherwise('/routes');
