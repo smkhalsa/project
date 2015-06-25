@@ -1,0 +1,20 @@
+<ion-view view-title="Routes">
+  <ion-content>
+    <label class="item item-input">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="text" placeholder="Search" ng-model='routeSearch.route.title'>
+    </label>
+    <div ng-repeat="route in routes | toArray | orderBy:'stop.distance' | filter:routeSearch">
+      <a class="item item-thumbnail-left" ui-sref="app.details({routeId:route.route.id})">
+        <img src="img/map.gif">
+        <h2>{{ route.route.title }}</h2>
+        <p>{{ route.stop.title }}</p>
+        <p>{{ route.stop.distance }}</p>
+        <div ng-repeat="value in routes.values">
+          <p><strong>{{ value.direction.title }}</strong></p>
+          <p>{{ value.minutes }} Minutes</p>
+        </div>
+      </a>
+    </div>
+  </ion-content>
+</ion-view>
