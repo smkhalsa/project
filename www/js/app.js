@@ -4,6 +4,7 @@ angular.module('app', [
     'app.home',
     'app.details',
     'app.services',
+    'angular-toArrayFilter',
     'app.auth'
   ])
   /**

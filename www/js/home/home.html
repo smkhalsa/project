@@ -3,7 +3,8 @@
     <h1 class="title">myBus</h1>
   </ion-header-bar>
   <ion-content ng-controller="HomeController">
-    <div ng-repeat="routes in stops | orderBy:'routes.stop.distance'" ng-click='changePage(routes, "details")'>
+  <input ng-model='routeSearch.route.title'>
+    <div ng-repeat="routes in stops | toArray | orderBy:'stop.distance' | filter:routeSearch" ng-click='changePage(routes, "details")'>
       <a class="item item-thumbnail-left">
         <img src="img/map.gif">
         <h2>{{ routes.route.title }}</h2>
