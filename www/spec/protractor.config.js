@@ -2,7 +2,7 @@ exports.config = {
   chromeDriver: '../../node_modules/chromedriver/lib/chromedriver/chromedriver',
   //please verify the stand alone version number matches wheat exists inside node_modules
   seleniumServerJar: '../../node_modules/selenium-server-standalone-jar/jar/selenium-server-standalone-2.45.0.jar',
-  seleniumAddress: 'http://localhost:4444/wd/hub',
+  // seleniumAddress: 'http://localhost:4444/wd/hub',
   restartBrowserBetweenTests: true,
   capabilities: {
     // You can use other browsers
