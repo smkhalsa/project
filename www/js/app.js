@@ -59,8 +59,8 @@ angular.module('app', [
           }
         },
         resolve: {
-          route: function($scopeParams, RestBusService) {
-            return RestBusService.getRoute($stateParams.routeId).resolve('routes')
+          route: function($stateParams, RestBusService) {
+            return RestBusService.getRoute($stateParams.routeId);
           }
         }
       })

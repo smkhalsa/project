@@ -45,31 +45,29 @@ angular.module('app.services', [
    * Gets the stations that are closest in proximity to the user 
    * @param {object} latlon - Object with a latitude and longitude
    */
-  return {
-    routes: [],
-    getRoutes: function() {
-      var dfd = $q.defer();
-      LocationService.getCurrentLocation(function(latlon){
-        $http({
-          url: 'http://mybus-api.herokuapp.com/locations/' + latlon.latitude + ',' + latlon.longitude + '/predictions',
-          method: 'GET'
-        }).success(function(data) {
-          this.routes = data;
-          dfd.resolve(data);
-        })
-      });
-      return dfd.promise;
-    },
-    getRoute: function(routeId) {
-      var dfd  = $q.defer();
-      this.routes.forEach(function(route) {
-        if (route.route.id === routeId) {
-          dfd.resolve(routes);
-        }
-      });
-      return dfd.promise;
-    }
-  }
+  var routes = [];
+  this.getRoutes = function() {
+    var dfd = $q.defer();
+    LocationService.getCurrentLocation(function(latlon){
+      $http({
+        url: 'http://mybus-api.herokuapp.com/locations/' + latlon.latitude + ',' + latlon.longitude + '/predictions',
+        method: 'GET'
+      }).success(function(data) {
+        routes = data;
+        dfd.resolve(data);
+      })
+    });
+    return dfd.promise;
+  };
+  this.getRoute =  function(routeId) {
+    var dfd  = $q.defer();
+    routes.forEach(function(route) {
+      if (route.route.id === routeId) {
+        dfd.resolve(route);
+      }
+    });
+    return dfd.promise;
+  };
 })
 
 .service('ReadFileService', function($http) {

@@ -2,9 +2,8 @@ angular.module('app.details', [])
 
     //.controller('DetailsController', function($scope, $ionicHistory, $location, LocationService, RestBusService, ReadFileService, $stateParams) {
     .controller('DetailsController', function($scope, route) {
-      console.log(route);
       $scope.route = route;
-
+    //
     //var init = function() {
     //  $scope.routeDetails = PageChangeService.currentRoute;
     //  $scope.getLocation(function(currentLocation) {

@@ -1,6 +1,9 @@
 <ion-view view-title="Routes">
   <ion-content>
-  <input ng-model='routeSearch.route.title'>
+    <label class="item item-input">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="text" placeholder="Search" ng-model='routeSearch.route.title'>
+    </label>
     <div ng-repeat="route in routes | toArray | orderBy:'stop.distance' | filter:routeSearch">
       <a class="item item-thumbnail-left" ui-sref="app.details({routeId:route.route.id})">
         <img src="img/map.gif">
@@ -15,23 +18,3 @@
     </div>
   </ion-content>
 </ion-view>
-
-<!--<ion-pane>-->
-  <!--<ion-header-bar class="bar-stable">-->
-    <!--<h1 class="title">myBus</h1>-->
-  <!--</ion-header-bar>-->
-  <!--<ion-content ng-controller="HomeController">-->
-    <!--<div ng-repeat="busRoutes in stops | orderBy:'busRoutes.stop.distance'" ng-click='changePage(busRoutes, "busRoutes")'>-->
-      <!--<a class="item item-thumbnail-left">-->
-        <!--<img src="img/map.gif">-->
-        <!--<h2>{{ busRoutes.route.title }}</h2>-->
-        <!--<p>{{ busRoutes.stop.title }}</p>-->
-        <!--<p>{{ busRoutes.stop.distance }}</p>-->
-        <!--<div ng-repeat="value in busRoutes.values">-->
-          <!--<p><strong>{{ value.direction.title }}</strong></p>-->
-          <!--<p>{{ value.minutes }} Minutes</p>-->
-        <!--</div>-->
-      <!--</a>-->
-    <!--</div>-->
-  <!--</ion-content>-->
-<!--</ion-pane>-->
