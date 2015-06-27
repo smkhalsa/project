@@ -1,6 +1,6 @@
 <ion-view view-title="details">
   <ion-content class="padding">
-
+    <ion-item>
     <h2>{{ route.route.title }}</h2>
     <p>{{ route.stop.title }}</p>
     <p>{{ route.stop.distance }}</p>
@@ -8,7 +8,10 @@
       <p><strong>{{ value.direction.title }}</strong></p>
       <p>{{ value.minutes }} Minutes</p>
     </div>
+    </ion-item>
 
-    <div id='mapContainer' style='margin: 0; padding: 0; height: 400px; width: 500px;'></div>
+    <ion-item style='margin: 0; padding: 0; height: 400px;'>
+    <ion-content id='mapContainer'></ion-content>
+    </ion-item>
   </ion-content>
 </ion-view>
