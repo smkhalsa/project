@@ -79,7 +79,23 @@ which won't be accessible from your original server.
 
 We are using Travis Ci. For this report there is no automated deployment. However, npm test is run on Travis Ci every time a pull request is submitted and when a pull request is merged into the master branch. After you fork a copy of this repo, you will need to setup your own Travis account. 
 
-  
+1. Visit https://travis-ci.org and create an account.
+1. Open your Organization inside Travis Ci
+  1. Sync your Organization
+  1. Turn on your newly forked repository
+1. Verify Permissions 
+  1. Visit https://github.com/<your Organization name>
+    1. Click Organization settings
+    1. Click Third-party access
+    1. Verify Travis Ci is Approved
+  1. Visit https://github.com/<your Organization name>/<your project name>/settings/hooks
+    1. Verify Travis Ci is an added Service
+1. Update the first line of this document to follow this format
+
+```
+[![Build Status](https://travis-ci.org/<your Organization name>/<your project name>.svg)](https://travis-ci.org/<your Organization name>/<your project name>)
+```
+
 
 ## Testing
 
@@ -103,10 +119,6 @@ the project root directory.
 gulp protractor
 ```
 
-## Roadmap
-
-View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
-
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
@@ -128,3 +140,4 @@ We used the following tools and technologies in this project
 1. Protractor
 1. Travis CI
 1. Waffle.io
+1. jsDoc
