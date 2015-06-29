@@ -7,21 +7,23 @@ angular.module('app.services', [
   'ngCordova'
 ])
 
-.service('LocationService', function($cordovaGeolocation, $ionicPlatform, $ionicPopup, MapService) {
+.service('LocationService', function($cordovaGeolocation, $ionicPlatform, $ionicPopup, $q, MapService) {
   /** 
    * Takes a callback whose first argument contains current location. Displays an error to the user if location cannot be found.
    * @param {func} callback - The function that recieves the lat and long
    */
-  this.getCurrentLocation = function(callback) {
+  this.getCurrentLocation = function() {
     var options = {
       timeout: 10000,
       enableHighAccuracy: false
     };
     // Note: cordova plugins must be wrapped in document.ready or $ionicPlatforml.ready
+    var dfd = $q.defer();
+
     $ionicPlatform.ready(function() {
       $cordovaGeolocation.getCurrentPosition(options)
         .then(function(position) {
-          callback({
+          dfd.resolve({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude
           });
@@ -37,6 +39,8 @@ angular.module('app.services', [
 
         });
     });
+
+    return dfd.promise;
   };
 
   // display user on map
@@ -54,7 +58,9 @@ angular.module('app.services', [
   var routes = [];
   this.getRoutes = function() {
     var dfd = $q.defer();
-    LocationService.getCurrentLocation(function(latlon){
+
+    LocationService.getCurrentLocation().then(function(latlon){
+      
       $http({
         url: 'http://mybus-api.herokuapp.com/locations/' + latlon.latitude + ',' + latlon.longitude + '/predictions',
         method: 'GET'
@@ -62,7 +68,9 @@ angular.module('app.services', [
         routes = data;
         dfd.resolve(data);
       });
+
     });
+
     return dfd.promise;
   };
 
