@@ -77,6 +77,10 @@ which won't be accessible from your original server.
 
 ### Set up continuous integration
 
+We are using Travis Ci. For this report there is no automated deployment. However, npm test is run on Travis Ci every time a pull request is submitted and when a pull request is merged into the master branch. After you fork a copy of this repo, you will need to setup your own Travis account. 
+
+  
+
 ## Testing
 
 We've installed a number of testing suites for you to use as you wish. These include:
