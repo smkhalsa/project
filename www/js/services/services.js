@@ -29,24 +29,10 @@ angular.module('app.services', [
           });
         }, function(err) {
           console.log(err);
-          /* TODO Handle GPS off error
-          var alertPopup = $ionicPopup.alert({
-            title: 'Cannot find your location',
-            template: 'Could not get the current position. Either GPS signals are weak or GPS has been switched off'
-          });
-          alertPopup.then(function(res) {
-            //handle error
-          });
-          */
         });
     });
 
     return dfd.promise;
-  };
-
-  // display user on map
-  this.displayUser = function(map, loc, image, interval) {
-    var userMarker = MapService.createMarker(map, loc, image);
   };
 
 })
@@ -107,37 +93,6 @@ angular.module('app.services', [
       method: 'GET'
     });
   };
-
-  // put vehicle on map
-  this.displayVehicle = function(map, loc, image) {
-    return new google.maps.Marker({
-        position: new google.maps.LatLng(loc.latitude, loc.longitude),
-        map: map,
-        icon: image
-      });
-  };
-
-  // create vehicles and display them on map
-  this.displayVehicles = function(map, route, image, interval) {
-    var displayVehicle = this.displayVehicle;
-    var vehicleMarkers = {};
-
-    //put vehicles on map
-    this.getVehicles()
-    .then(function(data) {
-      var vehicles = data.data;
-      var routeId = route.route.id;
-
-      for(var i = 0, len = vehicles.length; i < len; i++) {
-        if(vehicles[i].routeId === routeId) {
-          var loc = {latitude: vehicles[i].lat, longitude: vehicles[i].lon};
-          vehicleMarkers[vehicles[i].id] = displayVehicle(map, loc, image);
-        }
-      }
-
-    });
-  };
-
 })
 
 .service('ReadFileService', function($http) {
@@ -155,7 +110,7 @@ angular.module('app.services', [
   
 })
 
-.service('MapService', function() {
+.service('MapService', function(VehiclesService) {
 
   // create a map
   this.createMap = function(loc) {
@@ -172,7 +127,38 @@ angular.module('app.services', [
         icon: image
       });
   };
+  // display user on map
+  this.displayUser = function(map, loc, image) {
+    var userMarker = this.createMarker(map, loc, image);
+  };
 
+  // put vehicle on map
+  this.displayVehicle = function(map, loc, image) {
+    return new google.maps.Marker({
+      position: new google.maps.LatLng(loc.latitude, loc.longitude),
+      map: map,
+      icon: image
+    });
+  };
+  // create vehicles and display them on map
+  this.displayVehicles = function(map, route, image) {
+    var displayVehicle = this.displayVehicle;
+    var vehicleMarkers = {};
+
+    //put vehicles on map
+    VehiclesService.getVehicles()
+        .then(function(data) {
+          var vehicles = data.data;
+          var routeId = route.route.id;
+
+          for(var i = 0, len = vehicles.length; i < len; i++) {
+            if(vehicles[i].routeId === routeId) {
+              var loc = {latitude: vehicles[i].lat, longitude: vehicles[i].lon};
+              vehicleMarkers[vehicles[i].id] = displayVehicle(map, loc, image);
+            }
+          }
+        });
+  };
 });
 
 
