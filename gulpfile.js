@@ -75,7 +75,7 @@ gulp.task('deploy', shell.task([
   'ionic upload'
 ]));
 
-gulp.task('test', ['jshint', 'karma', 'protractor']);
+gulp.task('test', ['jshint', 'karma']);
 
 gulp.task('dev', ['test']);
 
