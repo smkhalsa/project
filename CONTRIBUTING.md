@@ -3,28 +3,30 @@
 ## General Workflow
 
 1. Fork the repo
-1. Cut a namespaced feature branch from master
+2. Cut a namespaced feature branch from master
   - bug/...
   - feat/...
   - test/...
   - doc/...
   - refactor/...
-1. Make commits to your feature branch. Prefix each commit like so:
+3. Run npm test to run gulp test which includes jshint and jasmine with karma.
+4. Make commits to your feature branch. Prefix each commit like so:
   - (feat) Added a new feature
   - (fix) Fixed inconsistent tests [Fixes #0]
   - (refactor) ...
   - (cleanup) ...
   - (test) ...
   - (doc) ...
-1. When you've finished with your fix or feature, Rebase upstream changes into your branch. submit a [pull request][]
+5. When you've finished with your fix or feature, Rebase upstream changes into your branch. submit a [pull request][]
    directly to master. Include a description of your changes.
-1. Your pull request will be reviewed by another maintainer. The point of code
+6. Your pull request will be reviewed by another maintainer. The point of code
    reviews is to help keep the codebase clean and of high quality and, equally
    as important, to help you grow as a programmer. If your code reviewer
    requests you make a change you don't understand, ask them why.
-1. Fix any issues raised by your code reviwer, and push your fixes as a single
+7. Fix any issues raised by your code reviwer, and push your fixes as a single
    new commit.
-1. Once the pull request has been reviewed, it will be merged by another member of the team. Do not merge your own commits.
+8. Once the pull request has been reviewed, it will be merged by another member of the team. Do not merge your own commits.
+9. Wait for TravisCI to approve your merge before merging it into your organizations repo.
 
 ## Detailed Workflow
 
@@ -53,6 +55,19 @@ These commands will help you do this:
 git checkout -b `your-branch-name`
 ```
 
+### Run npm test.
+
+Make sure there are no syntax errors and that all of your tests pass by running
+npm test as seen below:
+
+```bash
+npm test
+```
+
+These tests will error out and notify you if any test fails to pass. Use your own
+judgement as to whether or not it is appropriate to commit these changes.
+
+
 ### Make commits to your feature branch. 
 
 Prefix each commit like so
@@ -78,6 +93,7 @@ changes.
 - If you want to explain the commit in more depth, following the first line should
   be a blank line and then a more detailed description of the commit. This can be
   as detailed as you want, so dig into details here and keep the first line short.
+
 
 ### Rebase upstream changes into your branch
 
@@ -135,6 +151,11 @@ branch to fix these, then follow this process again from rebasing onwards.
 Once you get back here, make a comment requesting further review and
 someone will look at your code again. If they like it, it will get merged,
 else, just repeat again.
+
+### Wait for TravisCI
+
+Travis CI will run npm test and will warn you if there are any issues with your
+pull request. If there are any conflicts, commit at your own peril!
 
 Thanks for contributing!
 
