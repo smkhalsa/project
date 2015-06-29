@@ -5,8 +5,8 @@ angular.module('app.home', [])
 
     $scope.doRefresh = function() {
       RestBusService.getRoutes()
-      .then(function() {
-        $scope.routes = routes;
+      .then(function(data) {
+        $scope.routes = data;
       });
       $scope.$broadcast('scroll.refreshComplete');
     }
