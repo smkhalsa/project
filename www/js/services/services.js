@@ -75,10 +75,10 @@ angular.module('app.services', [
     return dfd.promise;
   };
 
-  this.getRoute =  function(routeId) {
+  this.getRoute =  function(uniqId) {
     var dfd  = $q.defer();
     routes.forEach(function(route) {
-      if (route.route.id === routeId) {
+      if (route.stop.id + route.route.id === uniqId) {
         dfd.resolve(route);
       }
     });

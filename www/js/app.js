@@ -74,7 +74,7 @@ angular.module('app', [
         }
       })
       .state('app.details', {
-        url: '/routes/:routeId',
+        url: '/routes/:uniqId',
         views: {
           'menuContent': {
             templateUrl: 'js/busRoutes/details.html',
@@ -83,7 +83,7 @@ angular.module('app', [
         },
         resolve: {
           route: function($stateParams, RestBusService) {
-            return RestBusService.getRoute($stateParams.routeId);
+            return RestBusService.getRoute($stateParams.uniqId);
           },
           userLocation: function(LocationService) {
             return LocationService.getCurrentLocation();
