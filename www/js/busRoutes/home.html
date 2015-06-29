@@ -6,9 +6,10 @@
     </label>
     <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()"></ion-refresher>
     <div ng-repeat="route in routes | toArray | orderBy:'stop.distance' | filter:routeSearch">
-      <a class="item item-thumbnail-left" ui-sref="app.details({routeId:route.route.id})">
+      <a class="item item-thumbnail-left" ui-sref="app.details({uniqId:route.stop.id + route.route.id})">
         <img src="img/map.gif">
         <h2>{{ route.route.title }}</h2>
+        <p>{{ route.values[0].direction.title }}</p>
         <p>{{ route.stop.title }}</p>
         <p>{{ route.stop.distance }}</p>
         <div ng-repeat="value in routes.values">

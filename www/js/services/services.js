@@ -56,7 +56,7 @@ angular.module('app.services', [
    * Gets the stations that are closest in proximity to the user 
    * @param {object} latlon - Object with a latitude and longitude
    */
-  var routes = [];
+  var routes = {};
   this.getRoutes = function() {
     var dfd = $q.defer();
 
@@ -66,6 +66,14 @@ angular.module('app.services', [
         url: 'http://mybus-api.herokuapp.com/locations/' + latlon.latitude + ',' + latlon.longitude + '/predictions',
         method: 'GET'
       }).success(function(data) {
+        // console.log(routes);
+        for (var i = 0; i < data.length; i++) {
+          console.log(data[i]);
+          // if (!routes[data[i].route.title]) {
+          //   routes[data[i].route.title] = data[i];
+          // }
+        }
+        // console.log(routes);
         routes = data;
         dfd.resolve(data);
       });
@@ -75,10 +83,10 @@ angular.module('app.services', [
     return dfd.promise;
   };
 
-  this.getRoute =  function(routeId) {
+  this.getRoute =  function(uniqId) {
     var dfd  = $q.defer();
     routes.forEach(function(route) {
-      if (route.route.id === routeId) {
+      if (route.stop.id + route.route.id === uniqId) {
         dfd.resolve(route);
       }
     });
