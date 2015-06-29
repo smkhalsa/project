@@ -47,7 +47,7 @@ angular.module('app.services', [
     var dfd = $q.defer();
 
     LocationService.getCurrentLocation().then(function(latlon){
-      
+      // Change url to your own deployed API. See more instructions on README.md
       $http({
         url: 'http://mybus-api.herokuapp.com/locations/' + latlon.latitude + ',' + latlon.longitude + '/predictions',
         method: 'GET'
@@ -98,6 +98,7 @@ angular.module('app.services', [
    */
   this.getVehicles = function() {
     return $http({
+      // Change url to your own deployed API. See more instructions on README.md
       url: 'http://mybus-api.herokuapp.com/agencies/sf-muni/vehicles',
       method: 'GET'
     });
