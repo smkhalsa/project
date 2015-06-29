@@ -99,6 +99,14 @@ We are using Travis Ci. For this report there is no automated deployment. Howeve
 
 ## Testing
 
+While developing, try using the
+
+```
+ionic serve --lab
+```
+
+command to test the app in your browser
+
 We've installed a number of testing suites for you to use as you wish. These include:
 
 ### Unit tests - Jasmine / Karma 
