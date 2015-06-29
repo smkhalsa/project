@@ -13,16 +13,16 @@ arrival times for buses and trains at each station.
 
 ## Table of Contents
 
-1. [Getting Started](#Getting-Started)
+1. [Getting Started](#getting-started)
     1. [Install Dependencies](#install-dependencies)
     1. [Transit Data Api](#transit-data-api)
-    1. [Server for authentication & other services (optional)](#server-for-authentication)
-1. [Deployment & Continuous Integration](#deployment-&-continuous-integration)
+    1. [Server for authentication & other services (optional)](#server-for-authentication--other-services-optional)
+1. [Deployment & Continuous Integration](#deployment--continuous-integration)
     1. [Set up deployment environment](#set-up-deployment-environment)
     1. [Set up continuous integration](#set-up-continuous-integration)
 1. [Testing](#testing)
-    1. [Unit tests - Jasmine / Karma](#Unit-tests-Jasmine/Karma)
-    1. [e2e tests - Protractor](#e2e-tests-Protractor)
+    1. [Unit tests - Jasmine / Karma](#unit-tests---jasmine--karma)
+    1. [e2e tests - Protractor](#e2e-tests---protractor)
 1. [Roadmap](#roadmap)
 1. [Contributing](#contributing)
 1. [Technology Stack](#technology-stack)
