@@ -41,22 +41,7 @@ angular.module('app.services', [
 
   // display user on map
   this.displayUser = function(map, loc, image, interval) {
-
     var userMarker = MapService.createMarker(map, loc, image);
-
-    // update user position
-    if(interval !== undefined && interval > 0) {
-      if(interval < 1000) {
-        interval = 1000;
-      }
-
-      setInterval(function(){
-        this.getCurrentLocation(function(data) {
-          userMarker.setPosition(new google.maps.LatLng(data.latitude, data.longitude));
-        });
-      }.bind(this), interval);
-    }
-
   };
 
 })
@@ -142,33 +127,6 @@ angular.module('app.services', [
       }
 
     });
-
-    // refresh marker positions if given interval
-    if(interval !== undefined && interval > 0) {
-      if(interval < 1000) {
-        interval = 1000;
-      }
-
-      setInterval(function(){
-        this.getVehicles()
-        .then(function(data) {
-          var vehicles = data.data;
-          for(var i = 0, len = vehicles.length; i < len; i++) {
-            var id = vehicles[i].id;
-
-            if(vehicleMarkers[id]) {
-              var lat = vehicles[i].lat;
-              var lon = vehicles[i].lon;
-              vehicleMarkers[id].setPosition(new google.maps.LatLng(lat, lon));
-            }
-
-          }
-
-        });
-      }.bind(this), interval);
-
-    }
-
   };
 
 })
