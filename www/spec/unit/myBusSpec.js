@@ -7,7 +7,6 @@ describe("myBus", function(){
 });
 
 describe("HomeController", function() {
-/** TODO
   beforeEach(module('app'));
   
   it("should have a change page method", inject(function($controller) {
@@ -17,6 +16,7 @@ describe("HomeController", function() {
     expect(!!scope.changePage).toBe(true);
   }));
 
+/** TODO
 
   it("should fetch stops on initialization", inject(function($controller) {
     var scope = {};
