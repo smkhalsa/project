@@ -34,6 +34,20 @@ bower install
 npm install -g gulp
 ```
 
+### Transit Data Api
+
+For our transit data, we are relying on the nextbus api. Since nextbus only publishes this data as an XML feed, we are
+using the [restbus library]((http://restbus.info/)) (a rest abstraction over the nextbus xml feed). Feel free to [fork
+our api]() server or roll your own using the [restbus library](http://restbus.info/). 
+
+### Server for authentication and other services (optional)
+
+We've also set up a node server with a postgres database to use for user authentication and any other services you'd 
+like to add in the future. Feel free to [fork it](). We used the sequelize ORM to interact with our postgres database.
+To easily install postgres on your local machine, take a look at the [Postgres App](http://postgresapp.com/).
+
+## Deployment & Continuous Integration
+
 ### Set up deployment environment
 
 ### Set up continuous integration
@@ -42,13 +56,18 @@ npm install -g gulp
 
 We've installed a number of testing suites for you to use as you wish. These include:
 
-Unit tests - Jasmine / Karma (www/spec)
+### Unit tests - Jasmine / Karma 
+
+The unit test spec files can be found at www/spec/unit. To run these tests (as well as jshint), run the following in
+your terminal window.
 
 ```
 npm test
 ```
 
-e2e tests - protractor (www/spec)
+### e2e tests - Protractor
+
+The end-to-end test spec files can be found at www/spec/e2e. To run these tests, run the following the the terminal.
 
 ```
 gulp protractor
