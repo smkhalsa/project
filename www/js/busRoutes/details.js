@@ -6,11 +6,11 @@ angular.module('app.details', [])
     $scope.map = MapService.createMap($scope.userLocation);
     
     $scope.doRefresh = function() {
-      LocationService.displayUser($scope.map, $scope.userLocation, './img/user.png', 3000);
+      LocationService.displayUser($scope.map, $scope.userLocation, './img/user.png');
 
       RestBusService.getStationLocation($scope.map, route);
 
-      VehiclesService.displayVehicles($scope.map, $scope.route, './img/bus.png', 3000);
+      VehiclesService.displayVehicles($scope.map, $scope.route, './img/bus.png');
       $scope.$broadcast('scroll.refreshComplete');
     };
    
