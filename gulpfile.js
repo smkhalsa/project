@@ -34,11 +34,12 @@ gulp.task('jsdoc', function() {
 
 gulp.task('karma', function(done) {
   karma.start({
-    configFile: __dirname + '/www/spec/karma.conf.js',
-    singleRun: true
-  }, function() {
-    done();
-  });
+      configFile: __dirname + '/www/spec/karma.conf.js',
+      singleRun: true
+    }, function(exitStatus) {
+      //0 represents all tests passing
+      done(exitStatus || 0);
+    });
 });
 
 gulp.task('jshint', function(done) {
@@ -78,7 +79,7 @@ gulp.task('test', ['jshint', 'karma', 'protractor']);
 
 gulp.task('dev', ['test']);
 
-gulp.task('prod', ['build', 'test', 'deploy'])
+gulp.task('prod', ['build', 'test', 'deploy']);
 
 gulp.task('default', ['sass']);
 
