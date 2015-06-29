@@ -64,6 +64,15 @@ ORM to interact with our postgres database. To easily install postgres on your l
 
 ### Set up deployment environment
 
+For easy deployment and integration with Travis CI (see below), consider using Heroku for deployment. If you are not
+familiar with Heroku, check out their [Getting Started with Node.js Guide]
+(https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction)
+
+Note: if you are using our server repo and would like to add a postgres database service hosted on heroku, make sure
+you add your postgres server as an addon in the resources page of your heroku server. If you try to add a postgres
+service from the databases section of your heroku dashboard, heroku will spin up a new server for this postgres service
+which won't be accessible from your original server.
+
 ### Set up continuous integration
 
 ## Testing
