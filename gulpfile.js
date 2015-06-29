@@ -75,11 +75,11 @@ gulp.task('deploy', shell.task([
   'ionic upload'
 ]));
 
-gulp.task('test', ['jshint', 'karma']);
+gulp.task('test', ['jshint', 'karma', 'protractor']);
 
 gulp.task('dev', ['test']);
 
-gulp.task('prod', ['build', 'test', 'deploy'])
+gulp.task('prod', ['build', 'test', 'deploy']);
 
 gulp.task('default', ['sass']);
 
