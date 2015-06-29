@@ -84,6 +84,9 @@ angular.module('app', [
         resolve: {
           route: function($stateParams, RestBusService) {
             return RestBusService.getRoute($stateParams.routeId);
+          },
+          userLocation: function(LocationService) {
+            return LocationService.getCurrentLocation();
           }
         }
       })
