@@ -17,6 +17,7 @@ describe("HomeController", function() {
     expect(!!scope.changePage).toBe(true);
   }));
 
+/** TODO
 
   it("should fetch stops on initialization", inject(function($controller) {
     var scope = {};
