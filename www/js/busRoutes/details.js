@@ -13,7 +13,6 @@ angular.module('app.details', [])
 
         VehiclesService.displayVehicles($scope.map, $scope.route, './img/bus.png', 3000);
       });
-      console.log('Running userLocation')
       $scope.$broadcast('scroll.refreshComplete');
     };
    
