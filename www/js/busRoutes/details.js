@@ -3,7 +3,7 @@ angular.module('app.details', [])
   .controller('DetailsController', function($scope, route, LocationService, userLocation, RestBusService, MapService, VehiclesService) {
     $scope.route = route;
     $scope.userLocation = userLocation;
-        $scope.map = MapService.createMap($scope.userLocation);
+    $scope.map = MapService.createMap($scope.userLocation);
     
     $scope.doRefresh = function() {
       LocationService.displayUser($scope.map, $scope.userLocation, './img/user.png', 3000);

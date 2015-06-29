@@ -4,7 +4,7 @@
       <i class="icon ion-search placeholder-icon"></i>
       <input type="text" placeholder="Search" ng-model='routeSearch.route.title'>
     </label>
-    <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()"></ion-refresher>
+    <ion-refresher pulling-text="Pull to refresh" on-refresh="doRefresh()" spinner="lines"></ion-refresher>
     <div ng-repeat="route in routes | toArray | orderBy:'stop.distance' | filter:routeSearch">
       <a class="item item-thumbnail-left" ui-sref="app.details({uniqId:route.stop.id + route.route.id})">
         <img src="img/map.gif">
