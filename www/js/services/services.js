@@ -40,7 +40,7 @@ angular.module('app.services', [
 .service('RestBusService', function($http, $q, $ionicLoading, LocationService, ReadFileService, MapService) {
   /** 
    * Gets the stations that are closest in proximity to the user 
-   * @param {object} latlon - Object with a latitude and longitude
+   * @param {object} latlon - Object with a latitude and longitude of user
    */
   var routes = [];
   this.getRoutes = function() {
@@ -60,7 +60,10 @@ angular.module('app.services', [
 
     return dfd.promise;
   };
-
+  /** 
+   * Gets the route information from the route clicked on the home screen 
+   * @param {string} uniqId - String from url
+   */
   this.getRoute =  function(uniqId) {
     var dfd  = $q.defer();
     routes.forEach(function(route) {
@@ -70,7 +73,11 @@ angular.module('app.services', [
     });
     return dfd.promise;
   };
-
+  /** 
+   * Gets the latitude and longitude of a specific stop by route 
+   * @param {object} map - Instance of google maps map
+   * @param {object} route - Current selected route
+   */
   this.getStationLocation = function(map, route) {
 
     ReadFileService.readFile('../stops.json')
@@ -85,8 +92,10 @@ angular.module('app.services', [
 })
 
 .service('VehiclesService', function($http) {
-
-  // get list of vehicles with api
+  
+  /** 
+   * Gets the list of vehicles by agency from the restbus API
+   */
   this.getVehicles = function() {
     return $http({
       url: 'http://mybus-api.herokuapp.com/agencies/sf-muni/vehicles',
@@ -98,7 +107,7 @@ angular.module('app.services', [
 .service('ReadFileService', function($http) {
 
   /**
-  * read a specific file
+  * Read a specific file
   * @param {string} loc - location of file
   */
   this.readFile = function(loc) {
@@ -112,14 +121,22 @@ angular.module('app.services', [
 
 .service('MapService', function(VehiclesService) {
 
-  // create a map
+  /**
+  * Creates a google maps map
+  * @param {object} loc - Contains latitude and longitude where the map should be centered
+  */
   this.createMap = function(loc) {
     // var sanFran = {lat: 37.78, lng: -122.416}
     var mapOptions = {center: {lat: loc.latitude, lng: loc.longitude}, zoom: 17};
     return new google.maps.Map(document.getElementById('mapContainer'), mapOptions);
   };
-
-  // create a map marker
+  
+  /**
+  * Creates a marker on a google maps map
+  * @param {object} map - Instance to place markers on
+  * @param {object} loc - Object with a latitude and longitude of marker
+  * @param {string} image - file path of image to use
+  */
   this.createMarker = function(map, loc, image) {
     return new google.maps.Marker({
         position: new google.maps.LatLng(loc.latitude, loc.longitude),
@@ -127,12 +144,23 @@ angular.module('app.services', [
         icon: image
       });
   };
-  // display user on map
+  
+  /**
+  * Creates a marker on a google maps map
+  * @param {object} map - Instance to place markers on
+  * @param {object} loc - Object with a latitude and longitude of user
+  * @param {string} image - file path of image to use
+  */
   this.displayUser = function(map, loc, image) {
     var userMarker = this.createMarker(map, loc, image);
   };
 
-  // put vehicle on map
+  /**
+  * Creates a marker on a google maps map
+  * @param {object} map - Instance to place markers on
+  * @param {object} loc - Object with a latitude and longitude of vehicle
+  * @param {string} image - file path of image to use
+  */
   this.displayVehicle = function(map, loc, image) {
     return new google.maps.Marker({
       position: new google.maps.LatLng(loc.latitude, loc.longitude),
@@ -140,7 +168,13 @@ angular.module('app.services', [
       icon: image
     });
   };
-  // create vehicles and display them on map
+
+  /**
+  * Creates a marker on a google maps map
+  * @param {object} map - Instance to place markers on
+  * @param {object} loc - Object with route information
+  * @param {string} image - file path of image to use
+  */
   this.displayVehicles = function(map, route, image) {
     var displayVehicle = this.displayVehicle;
     var vehicleMarkers = {};

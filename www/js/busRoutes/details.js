@@ -5,6 +5,7 @@ angular.module('app.details', [])
     $scope.userLocation = userLocation;
     $scope.map = MapService.createMap($scope.userLocation);
     
+    //Called from ionic pulldown refresh
     $scope.doRefresh = function() {
       MapService.displayUser($scope.map, $scope.userLocation, './img/user.png');
 
@@ -13,7 +14,7 @@ angular.module('app.details', [])
       MapService.displayVehicles($scope.map, $scope.route, './img/bus.png');
       $scope.$broadcast('scroll.refreshComplete');
     };
-   
+    //Initial page load
     $scope.doRefresh();
 
   });
