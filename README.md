@@ -23,8 +23,8 @@ arrival times for buses and trains at each station.
 1. [Testing](#testing)
     1. [Unit tests - Jasmine / Karma](#unit-tests---jasmine--karma)
     1. [e2e tests - Protractor](#e2e-tests---protractor)
-1. [Roadmap](#roadmap)
 1. [Contributing](#contributing)
+1. [Documentation](#documentation)
 1. [Technology Stack](#technology-stack)
 
 ## Getting Started
@@ -96,7 +96,6 @@ We are using Travis Ci. For this report there is no automated deployment. Howeve
 [![Build Status](https://travis-ci.org/<your Organization name>/<your project name>.svg)](https://travis-ci.org/<your Organization name>/<your project name>)
 ```
 
-
 ## Testing
 
 While developing, try using the
@@ -130,6 +129,13 @@ gulp protractor
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+## Documentation
+
+```
+gulp jsdoc
+open docs/index.html
+```
 
 ## Technology Stack
 
