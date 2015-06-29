@@ -67,6 +67,8 @@ angular.module('app', [
             controller: 'HomeController'
           }
         },
+        // the resolve option will wait for the results an async function and pass the results to the controller on
+        // state change. Learn more at http://learn.ionicframework.com/formulas/data-the-right-way/
         resolve: {
           routes: function(RestBusService) {
             return RestBusService.getRoutes();
