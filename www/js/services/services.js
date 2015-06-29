@@ -28,7 +28,8 @@ angular.module('app.services', [
             longitude: position.coords.longitude
           });
         }, function(err) {
-            console.log('hey', err);
+          console.log(err);
+          /* TODO Handle GPS off error
           var alertPopup = $ionicPopup.alert({
             title: 'Cannot find your location',
             template: 'Could not get the current position. Either GPS signals are weak or GPS has been switched off'
@@ -36,7 +37,7 @@ angular.module('app.services', [
           alertPopup.then(function(res) {
             //handle error
           });
-
+          */
         });
     });
 
