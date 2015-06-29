@@ -33,14 +33,17 @@ gulp.task('jsdoc', function() {
 });
 
 gulp.task('karma', function(done) {
-    karma.start({
-    configFile: __dirname + '/www/spec/karma.conf.js',
-    singleRun: true
-  }, done);
+  karma.start({
+      configFile: __dirname + '/www/spec/karma.conf.js',
+      singleRun: true
+    }, function(exitStatus) {
+      //0 represents all tests passing
+      done(exitStatus || 0);
+    });
 });
 
 gulp.task('jshint', function(done) {
-  gulp.src('./www/js/**/*.js')  
+  gulp.src('./www/js/**/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish'))
     .pipe(jshint.reporter('fail'))
@@ -52,7 +55,8 @@ gulp.task('jshint', function(done) {
 });
 
 gulp.task('protractor', shell.task([
-  'protractor www/spec/protractor.config.js']));
+  'protractor www/spec/protractor.config.js'
+]));
 
 gulp.task('build', function() {
   gulp.src('./www/js/**/*.js')
@@ -71,11 +75,11 @@ gulp.task('deploy', shell.task([
   'ionic upload'
 ]));
 
-gulp.task('test', ['jshint', 'karma', 'protractor']);
+gulp.task('test', ['jshint', 'karma']);
 
 gulp.task('dev', ['test']);
 
-gulp.task('prod', ['build', 'test', 'deploy'])
+gulp.task('prod', ['build', 'test', 'deploy']);
 
 gulp.task('default', ['sass']);
 
