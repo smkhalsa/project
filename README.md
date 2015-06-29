@@ -13,38 +13,52 @@ arrival times for buses and trains at each station.
 
 ## Table of Contents
 
-1. [Usage](#Usage)
-1. [Requirements](#requirements)
-1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
-1. [Team](#team)
+1. [Getting Started](#Getting-Started)
+    1. [Install Dependencies](#install-dependencies)
+    1. [Transit Data Api](#transit-data-api)
+    1. [Server for authentication & other services (optional)](#server-for-authentication)
+1. [Deployment & Continuous Integration](#deployment-&-continuous-integration)
+    1. [Set up deployment environment](#set-up-deployment-environment)
+    1. [Set up continuous integration](#set-up-continuous-integration)
+1. [Testing](#testing)
+    1. [Unit tests - Jasmine / Karma](#Unit-tests-Jasmine/Karma)
+    1. [e2e tests - Protractor](#e2e-tests-Protractor)
+1. [Roadmap](#roadmap)
 1. [Contributing](#contributing)
+1. [Technology Stack](#technology-stack)
 
 ## Getting Started
 
 ### Install Dependencies
 
-From within the root directory:
+First, install ionic, bower, and gulp if you don't already have them installed.
 
-```sh
-sudo npm install -g bower
+```
+npm install -g cordova ionic      // installs ionic framework and cordova dependency
+npm install -g bower              // installs bower globally
+npm install -g gulp               // installs gulp globally
+```
+
+Next, run the following commands to install all the required dependencies.
+
+```
 npm install
 bower install
-npm install -g gulp
 ```
 
 ### Transit Data Api
 
 For our transit data, we are relying on the nextbus api. Since nextbus only publishes this data as an XML feed, we are
-using the [restbus library]((http://restbus.info/)) (a rest abstraction over the nextbus xml feed). Feel free to [fork
-our api]() server or roll your own using the [restbus library](http://restbus.info/). 
+using the [restbus library](http://restbus.info/) (a rest abstraction over the nextbus xml feed). Feel free to [fork
+our api](https://github.com/inverted-murmuration/api) server or roll your own using the 
+[restbus library](http://restbus.info/). 
 
-### Server for authentication and other services (optional)
+### Server for authentication & other services (optional)
 
 We've also set up a node server with a postgres database to use for user authentication and any other services you'd 
-like to add in the future. Feel free to [fork it](). We used the sequelize ORM to interact with our postgres database.
-To easily install postgres on your local machine, take a look at the [Postgres App](http://postgresapp.com/).
+like to add in the future. Feel free to [fork it](https://github.com/inverted-murmuration/server). We used the sequelize
+ORM to interact with our postgres database. To easily install postgres on your local machine, take a look at the 
+[Postgres App](http://postgresapp.com/).
 
 ## Deployment & Continuous Integration
 
@@ -59,7 +73,7 @@ We've installed a number of testing suites for you to use as you wish. These inc
 ### Unit tests - Jasmine / Karma 
 
 The unit test spec files can be found at www/spec/unit. To run these tests (as well as jshint), run the following in
-your terminal window.
+your terminal window from the project root directory.
 
 ```
 npm test
@@ -67,7 +81,8 @@ npm test
 
 ### e2e tests - Protractor
 
-The end-to-end test spec files can be found at www/spec/e2e. To run these tests, run the following the the terminal.
+The end-to-end test spec files can be found at www/spec/e2e. To run these tests, run the following the the terminal from
+the project root directory.
 
 ```
 gulp protractor
@@ -81,7 +96,7 @@ View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
-## Stack
+## Technology Stack
 
 We used the following tools and technologies in this project
 
