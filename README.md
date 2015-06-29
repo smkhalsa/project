@@ -31,12 +31,14 @@ arrival times for buses and trains at each station.
 
 ### Install Dependencies
 
-First, install ionic, bower, and gulp if you don't already have them installed.
+First, install the following if you don't already have them installed.
 
 ```
 npm install -g cordova ionic      // installs ionic framework and cordova dependency
 npm install -g bower              // installs bower globally
 npm install -g gulp               // installs gulp globally
+npm install -g jasmine            // installs jasmine globally
+npm install -g jasmine-node       // (if using our server repo) installs jasmine-node globally
 ```
 
 Next, run the following commands to install all the required dependencies.
@@ -65,7 +67,7 @@ ORM to interact with our postgres database. To easily install postgres on your l
 ### Set up deployment environment
 
 For easy deployment and integration with Travis CI (see below), consider using Heroku for deployment. If you are not
-familiar with Heroku, check out their [Getting Started with Node.js Guide]
+familiar with Heroku, check out their [Getting Started with Node.js] guide.
 (https://devcenter.heroku.com/articles/getting-started-with-nodejs#introduction)
 
 Note: if you are using our server repo and would like to add a postgres database service hosted on heroku, make sure
@@ -121,4 +123,4 @@ We used the following tools and technologies in this project
 1. Karma
 1. Protractor
 1. Travis CI
-
+1. Waffle.io
