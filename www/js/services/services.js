@@ -7,7 +7,7 @@ angular.module('app.services', [
   'ngCordova'
 ])
 
-.service('LocationService', function($cordovaGeolocation, $ionicPlatform, $ionicPopup, $q, MapService) {
+.service('LocationService', function($cordovaGeolocation, $ionicPlatform, $ionicPopup, $q) {
   /** 
    * Takes a callback whose first argument contains current location. Displays an error to the user if location cannot be found.
    * @param {func} callback - The function that recieves the lat and long
@@ -73,18 +73,21 @@ angular.module('app.services', [
     });
     return dfd.promise;
   };
+  
   /** 
    * Gets the latitude and longitude of a specific stop by route 
    * @param {object} map - Instance of google maps map
    * @param {object} route - Current selected route
+   * @param {string} image - path to image file
    */
-  this.getStationLocation = function(map, route) {
+
+  this.getStationLocation = function(map, route, image) {
 
     ReadFileService.readFile('../stops.json')
     .then(function(data) {
       var station = data.data[route.stop.id];
       var loc = {latitude: station.lat, longitude: station.lon};
-      MapService.createMarker(map, loc);
+      MapService.createMarker(map, loc, image);
     });
 
   };
@@ -120,7 +123,7 @@ angular.module('app.services', [
   
 })
 
-.service('MapService', function(VehiclesService) {
+.service('MapService', function(LocationService, VehiclesService) {
 
   /**
   * Creates a google maps map
@@ -153,21 +156,28 @@ angular.module('app.services', [
   * @param {string} image - file path of image to use
   */
   this.displayUser = function(map, loc, image) {
-    var userMarker = this.createMarker(map, loc, image);
+    return this.createMarker(map, loc, image);
   };
 
   /**
   * Creates a marker on a google maps map
   * @param {object} map - Instance to place markers on
+  * @param {string} - vehicle id
   * @param {object} loc - Object with a latitude and longitude of vehicle
   * @param {string} image - file path of image to use
   */
-  this.displayVehicle = function(map, loc, image) {
-    return new google.maps.Marker({
-      position: new google.maps.LatLng(loc.latitude, loc.longitude),
-      map: map,
-      icon: image
-    });
+  this.displayVehicle = function(map, id, loc, image) {
+    var vehicleMarker = {
+      marker: new google.maps.Marker({
+          position: new google.maps.LatLng(loc.latitude, loc.longitude),
+          map: map,
+          icon: image
+        }),
+
+      id: id
+    };
+
+    return vehicleMarker;
   };
 
   /**
@@ -178,22 +188,74 @@ angular.module('app.services', [
   */
   this.displayVehicles = function(map, route, image) {
     var displayVehicle = this.displayVehicle;
-    var vehicleMarkers = {};
+    var markersArray = [];
 
     //put vehicles on map
     VehiclesService.getVehicles()
-        .then(function(data) {
-          var vehicles = data.data;
-          var routeId = route.route.id;
+      .then(function(data) {
+        var vehicles = data.data;
+        var routeId = route.route.id;
 
-          for(var i = 0, len = vehicles.length; i < len; i++) {
-            if(vehicles[i].routeId === routeId) {
-              var loc = {latitude: vehicles[i].lat, longitude: vehicles[i].lon};
-              vehicleMarkers[vehicles[i].id] = displayVehicle(map, loc, image);
-            }
+        for(var i = 0, len = vehicles.length; i < len; i++) {
+          if(vehicles[i].routeId === routeId) {
+            var loc = {latitude: vehicles[i].lat, longitude: vehicles[i].lon};
+            markersArray.push(displayVehicle(map, vehicles[i].id, loc, image));
           }
-        });
+        }
+      });
+
+    return markersArray;
   };
+
+  /**
+  * refresh user marker location
+  * @param {object} marker
+  */
+  this.refreshUserMarker = function(marker){
+    if(marker === undefined) {
+      return ;
+    }
+
+    // change position of user using new lat lng
+    LocationService.getCurrentLocation()
+      .then(function(data){
+        marker.setPosition(new google.maps.LatLng(data.latitude, data.longitude));
+      });
+  };
+
+  /**
+  * refresh locations of markers in an array of markers
+  * @param {array} markers
+  */
+  this.refreshVehicleMarkers = function(markers){
+    if(markers === undefined) {
+      return ;
+    }
+
+    var vehicleMarkers = {};
+
+    VehiclesService.getVehicles()
+      .then(function(data){
+        var vehicles = data.data;
+        
+        // add route vehicles to object
+        for(var i = 0, len = markers.length; i < len; i++) {
+          vehicleMarkers[markers[i].id] = markers[i];
+        }
+
+        // change position of vehicle makers using new lats and lngs
+        for(var j = 0, len2 = vehicles.length; j < len2; j++) { 
+          if(vehicleMarkers[vehicles[j].id]) {
+            var lat = vehicles[j].lat;
+            var lng = vehicles[j].lon;
+            vehicleMarkers[vehicles[j].id].marker.setPosition(new google.maps.LatLng(lat, lng));
+          }
+        }
+
+      });
+    
+  };
+
 });
 
 
